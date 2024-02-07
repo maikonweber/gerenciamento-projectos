@@ -8,8 +8,8 @@ async function bootstrap() {
 
 
   const config = new DocumentBuilder()
-    .setTitle('JF')
-    .setDescription('JF')
+    .setTitle('Soft-House')
+    .setDescription('MutterBank')
     .setVersion('1.0')
     .addTag('')
     .addBearerAuth()
@@ -19,7 +19,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
-  
+
   await app.listen(3000);
 }
 bootstrap();
