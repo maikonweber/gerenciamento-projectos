@@ -20,6 +20,25 @@ $ npm run migrate:up
 
 ## Running the app
   O App ira rodar na porta 3000 tendo disponível a documentação do Swagger no localhost:3000/api
+  ao iniciar o projeto é rodado um Seed colocando estas contas dentro do banco de dados.
+
+                accountNumber: 32323232,
+                clientDocument: '40880449837',
+                clientName: "Maikon Weber de Carvalho",
+                currentBalance: 100.0
+       
+      
+                accountNumber: 11111111,
+                clientDocument: '40880449837',
+                clientName: "Maikon Weber de Carvalho",
+                currentBalance: 100.0
+          
+                accountNumber: 12395021,
+                clientDocument: '40880449837',
+                clientName: "Maikon Weber de Carvalho",
+                currentBalance: 100.
+  
+  Existe um rota de authenticação para adquirir atravez do login um Token JWT e somente com ele é possível acessar a Rota de AccountDetails e BalanceTransfer.
 
 ```bash
 # development
