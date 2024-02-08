@@ -6,9 +6,16 @@ import { AccountModule } from './account/account.module';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
 import { PrismaModule } from 'prisma/prisma.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [AccountModule, AuthModule, PrismaModule],
+  imports: [AccountModule,
+    AuthModule,
+    JwtModule.register({
+      secret: 'your-secret-key',
+      signOptions: { expiresIn: '5d' },
+    }),
+    PrismaModule],
   controllers: [],
   providers: [AppService, SeedServiceService, AccountService, AuthService],
 })

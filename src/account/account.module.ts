@@ -4,7 +4,9 @@ import { AccountController } from './account.controller';
 import { PrismaModule } from 'prisma/prisma.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule,
+
+  ],
   controllers: [AccountController],
   providers: [AccountService],
 })

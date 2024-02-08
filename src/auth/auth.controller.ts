@@ -1,9 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 import { ApiProperty, ApiTags } from '@nestjs/swagger';
-import { Account } from 'src/account/entities/account.entity';
 
 class LoginDto {
   @ApiProperty()
@@ -17,7 +14,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  create(@Body() login: LoginDto) {
+  loginIn(@Body() login: LoginDto) {
     return this.authService.loginIn(login.accountNumber);
   }
 }

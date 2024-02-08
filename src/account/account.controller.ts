@@ -1,34 +1,28 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Request, Delete, UseGuards } from '@nestjs/common';
 import { AccountService } from './account.service';
-import { CreateAccountDto } from './dto/create-account.dto';
+import { GetAccountDetails, TransferBalance } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
+import { JwtAuthGuard } from 'src/auth/Guard/localGuard';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('account')
 export class AccountController {
-  constructor(private readonly accountService: AccountService) {}
+    constructor(private readonly accountService: AccountService) { }
 
-  @Post()
-  create(@Body() createAccountDto: CreateAccountDto) {
-    return this.accountService.create(createAccountDto);
-  }
+    @Get('details')
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
+    getDetails(@Request() req) {
 
-  @Get()
-  findAll() {
-    return this.accountService.findAll();
-  }
+        return this.accountService.getDetails(req.user.account.accountNumber);
+    }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.accountService.findOne(+id);
-  }
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
+    @Post('transfer-balance')
+    transferBalance(@Body() TransferBalance: TransferBalance, @Request() req) {
+        return this.accountService.transferBalance(TransferBalance, req.user.account)
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAccountDto: UpdateAccountDto) {
-    return this.accountService.update(+id, updateAccountDto);
-  }
+    }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.accountService.remove(+id);
-  }
 }

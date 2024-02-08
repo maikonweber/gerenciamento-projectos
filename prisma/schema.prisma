@@ -10,23 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model BankAccount {
+model bankaccount {
   id Int @id @default(autoincrement())
-  accountNumber Int
+  accountNumber Int @unique 
   currentBalance Float @default(100) 
   clientName String
   clientDocument String
   createdAt DateTime @default(now())
-  transactions FinancialTransaction[]
+  transactions financialtransaction[]
 }
 
-model FinancialTransaction {
+model financialtransaction {
   id             Int      @id @default(autoincrement())
-  accountId      Int
+  accountOriginId Int
+  accountNumber Int
   transactionType String
   amount         Float
   createdAt      DateTime @default(now())
-
+ 
   // Define the foreign key relationship with BankAccount
-  account        BankAccount @relation(fields: [accountId], references: [id])
+  account        bankaccount @relation(fields: [accountOriginId], references: [id])
 }

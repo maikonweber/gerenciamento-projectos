@@ -14,7 +14,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         const httpContext = context.switchToHttp();
         if (httpContext.getRequest) {
             const request = httpContext.getRequest();
-
+            this.logger.log(request.headers.authorization)
             const authHeader = request.headers.authorization;
             if (!authHeader || !authHeader.startsWith('Bearer ')) {
                 throw new ForbiddenException('Invalid or missing Bearer token');
@@ -30,7 +30,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         if (err || !user) {
             throw err || new ForbiddenException();
         }
-
+        this.logger.log(user)
         return user
     }
 }
