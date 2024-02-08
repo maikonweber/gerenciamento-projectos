@@ -38,8 +38,9 @@ $ npm run migrate:up
                 clientName: "Maikon Weber de Carvalho",
                 currentBalance: 100.
   
-  Existe um rota de authenticação para adquirir atravez do login um Token JWT e somente com ele é possível acessar a Rota de AccountDetails e BalanceTransfer.
-
+  Existe um rota de authenticação para adquirir atravez do login um Token JWT e somente com ele é possível acessar a Rota de AccountDetails e BalanceTransfer. Atravez do Swagger é possível setar token e continuar a fazer as chamadas
+  que estão privadas com Token.
+  
 ```bash
 # development
 $ npm run start
